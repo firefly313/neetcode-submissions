@@ -1,0 +1,17 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        ## dp arr
+        dp = [-1] * len(nums)
+        def dfs(i):
+            ## base case
+            if i >= len(nums):
+                return 0
+            if dp[i] != -1:
+                return dp[i]
+            rob = nums[i] + dfs(i+2)
+            skip = dfs(i+1)
+            dp[i] = max(rob, skip)
+            return dp[i]
+
+        ## return
+        return dfs(0)
